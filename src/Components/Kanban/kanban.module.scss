@@ -1,5 +1,14 @@
 @import '../../Styles//variables';
 
-.kanban {
-    color: white;
+.kanbanHeader {
+	color: white;
+	border-bottom: 1px solid $white;
+}
+
+.kanbanHeaderTitle {
+	margin: 10px 0;
+}
+
+.kanbanHeaderDescription {
+	margin-bottom: 15px;
 }
