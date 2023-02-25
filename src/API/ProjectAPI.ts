@@ -5,6 +5,11 @@ export const fetchProjects = async () => {
 	return data;
 };
 
+export const fetchProjectById = async (id: string | undefined) => {
+	const { data } = await axios.get(`/projects/${id}`);
+	return data;
+};
+
 export const removeProject = async (id: string) => {
 	await axios.delete(`/projects/${id}`);
 };
