@@ -6,7 +6,7 @@ import { MdEdit } from 'react-icons/md';
 import { IProjectCard } from './ProjectCard.types';
 
 import styles from './projectСard.module.scss';
-import { Button } from '../../UI';
+import { Button, TextField } from '../../UI';
 
 const ProjectCard: FC<IProjectCard> = ({
 	color,
@@ -24,7 +24,11 @@ const ProjectCard: FC<IProjectCard> = ({
 
 	const onChangeEdit = () => {
 		if (isEdit) {
-			onEdit(id, { title: updatedTitle, description: updatedDescription });
+			const form = {
+				title: updatedTitle,
+				description: updatedDescription,
+			};
+			onEdit(id, form);
 		}
 		setIsEdit(!isEdit);
 	};
@@ -42,30 +46,40 @@ const ProjectCard: FC<IProjectCard> = ({
 	return (
 		<div className={`${styles.projectCard} ${styles[color]}`}>
 			<div className={styles.projectCardIcons}>
-				<MdEdit className={styles.editProjectCard} onClick={onChangeEdit} />
+				<MdEdit
+					className={
+						isEdit ? styles.editProjectCardActive : styles.editProjectCard
+					}
+					onClick={onChangeEdit}
+				/>
 				<ImCross className={styles.removeProjectCard} onClick={onRemove} />
 			</div>
 			{isEdit ? (
-				<input
-					onChange={onChangeUpdatedTitle}
-					value={updatedTitle}
-					type='text'
-				/>
+				<>
+					<TextField
+						className={styles.projectCardTitle}
+						onChange={onChangeUpdatedTitle}
+						value={updatedTitle}
+					/>
+					<TextField
+						onChange={onChangeUpdatedDescription}
+						value={updatedDescription}
+					/>
+				</>
 			) : (
-				<h1 className={styles.projectCardTitle}>{updatedTitle}</h1>
+				<>
+					<h1 className={styles.projectCardTitle}>{updatedTitle}</h1>
+					<p className={styles.projectCardDescription}>{updatedDescription}</p>
+				</>
 			)}
-			{isEdit ? (
-				<input
-					onChange={onChangeUpdatedDescription}
-					value={updatedDescription}
-					type='text'
-				/>
-			) : (
-				<p className={styles.projectCardDescription}>{updatedDescription}</p>
-			)}
-			{routing && (
+
+			{routing && !isEdit && (
 				<Link to={routing}>
-					<Button className={styles.projectCardButton} color='black' content='Open' />
+					<Button
+						className={styles.projectCardButton}
+						color='black'
+						content='Open'
+					/>
 				</Link>
 			)}
 		</div>

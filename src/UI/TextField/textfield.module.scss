@@ -1,0 +1,10 @@
+@import '../../Styles/variables';
+
+.textfield {
+	border: none;
+	border-bottom: 1px solid $black;
+    width: 100%;
+	&:focus {
+		outline: none;
+	}
+}
