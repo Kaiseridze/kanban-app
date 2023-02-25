@@ -1,6 +1,6 @@
 @import '../../Styles/variables';
 
-.card {
+.projectCard {
 	position: relative;
 	max-width: 300px;
 	max-height: 150px;
@@ -9,14 +9,16 @@
 	border-radius: 12px;
 }
 
-.cardTitle {
+.projectCardIcons {
+	display: flex;
+	justify-content: space-between;
+}
+
+.projectCardTitle {
 	font-size: 16px;
 }
 
-.removeCard {
-	position: absolute;
-	right: 5px;
-	top: 5px;
+.removeProjectCard {
 	transition: 0.2s ease-in;
 	cursor: pointer;
 	&:hover {
@@ -24,7 +26,15 @@
 	}
 }
 
-.cardButton{
+.editProjectCard {
+	transition: 0.2s ease-in;
+	cursor: pointer;
+	&:hover {
+		color: $blue;
+	}
+}
+
+.projectCardButton {
 	float: right;
 }
 

@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 
-import { Card } from '../../Entities';
+import { ProjectCard } from '../../Components';
 import { Button, Loader } from '../../UI';
 
 import {
 	fetchProjects,
 	removeProject,
 	createProject,
+	updateProject,
 } from '../../API/ProjectAPI';
 
 import { IProjectModel } from '../../Models';
@@ -17,12 +18,16 @@ const Projects = () => {
 	const [data, setData] = useState<IProjectModel[]>([]);
 	const [pending, setPending] = useState<boolean>(false);
 
-	useEffect(() => {
+	const onFetch = () => {
 		setPending(true);
 		fetchProjects().then((data: IProjectModel[]) => {
 			setPending(false);
 			setData(data);
 		});
+	};
+
+	useEffect(() => {
+		onFetch();
 	}, []);
 
 	const onRemove = (id: string) => {
@@ -41,16 +46,18 @@ const Projects = () => {
 
 	return (
 		<div className={styles.projectsWrapper}>
-			<Button onClick={onCreate} color='white' content='Add new projects' />
+			<Button onClick={onCreate} color='white' content='Add new project' />
 			<div className={styles.projects}>
 				{data.map((project) => (
-					<Card
+					<ProjectCard
 						key={project._id}
+						id={project._id}
 						title={project.title}
 						description={project.description}
 						color='white'
 						routing={`/project/${project._id}`}
-						removeable={() => onRemove(project._id)}
+						onRemove={() => onRemove(project._id)}
+						onEdit={updateProject}
 					/>
 				))}
 			</div>

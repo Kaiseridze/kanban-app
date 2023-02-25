@@ -1,5 +1,5 @@
 export interface IProjectModel {
 	title: string;
-	description?: string;
+	description: string;
 	_id: string;
 }
