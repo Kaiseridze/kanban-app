@@ -17,6 +17,10 @@
 	margin-bottom: 15px;
 }
 
+.kanbanHeaderButton {
+	margin-bottom: 20px;
+}
+
 .kanbanSections {
-	@extend %three-elements-by-grid
+	@extend %three-elements-by-grid;
 }

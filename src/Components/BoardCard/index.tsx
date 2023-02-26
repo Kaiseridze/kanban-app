@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 
 import { ImCross } from 'react-icons/im';
 import { MdEdit } from 'react-icons/md';
+import { VscAdd } from 'react-icons/vsc';
 
 import styles from './boardCard.module.scss';
 
@@ -31,18 +32,25 @@ const BoardCard: FC<IBoardCard> = ({ title, onRemove, id }) => {
 	return (
 		<div className={styles.boardCard}>
 			{isEdit ? (
-				<TextField onChange={onChangeUpdatedTitle} value={updatedTitle} />
+				<TextField onChange={onChangeUpdatedTitle} value={updatedTitle} color='white' />
 			) : (
 				<h3 className={styles.boardCardTitle}>{updatedTitle}</h3>
 			)}
 			<div className={styles.boardCardIcons}>
-				<MdEdit
-					onClick={onEditTitle}
-					className={
-						isEdit ? `${styles.boardCardEditActive}` : `${styles.boardCardEdit}`
-					}
-				/>
-				<ImCross className={styles.boardCardRemove} onClick={onRemove} />
+				{isEdit ? (
+					<>
+						<MdEdit
+							onClick={onEditTitle}
+							className={styles.boardCardEditActive}
+						/>
+					</>
+				) : (
+					<>
+						<VscAdd className={styles.boardCardAdd} />
+						<MdEdit onClick={onEditTitle} className={styles.boardCardEdit} />
+						<ImCross className={styles.boardCardRemove} onClick={onRemove} />
+					</>
+				)}
 			</div>
 		</div>
 	);

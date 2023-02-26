@@ -10,23 +10,32 @@
 	border-radius: 5px;
 }
 
+.boardCardAdd {
+	cursor: pointer;
+	transition: 0.3s linear;
+
+	&:hover {
+		color: $green;
+	}
+}
+
 .boardCardRemove {
 	cursor: pointer;
 	transition: 0.2s ease-in-out;
 	&:hover {
 		color: $red;
 	}
-    margin-left: 10px;
 }
 
-.boardCardIcons{
-    display: flex;
-    align-items: center;
+.boardCardIcons {
+	display: flex;
+	align-items: center;
 }
 
 .boardCardEdit {
 	cursor: pointer;
 	transition: 0.2s ease-in-out;
+	margin: 0 10px;
 	&:hover {
 		color: $blue;
 	}

@@ -60,11 +60,13 @@ const ProjectCard: FC<IProjectCard> = ({
 					<TextField
 						className={styles.projectCardTitle}
 						onChange={onChangeUpdatedTitle}
+						color='black'
 						value={updatedTitle}
 					/>
 					<TextField
 						onChange={onChangeUpdatedDescription}
 						value={updatedDescription}
+						color='black'
 					/>
 				</>
 			) : (

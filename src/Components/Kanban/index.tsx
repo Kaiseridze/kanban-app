@@ -48,7 +48,7 @@ const Kanban = () => {
 			<div className={styles.kanbanHeader}>
 				<h1 className={styles.kanbanHeaderTitle}>{project?.title}</h1>
 				<p className={styles.kanbanHeaderDescription}>{project?.description}</p>
-				<Button onClick={onCreate} color='black' content='Add new board'/>
+				<Button className={styles.kanbanHeaderButton} onClick={onCreate} color='white' content='Add new board'/>
 			</div>
 			<div className={styles.kanbanSections}>
 				{boards.map((board) => (

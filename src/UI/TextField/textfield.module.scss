@@ -2,9 +2,20 @@
 
 .textfield {
 	border: none;
-	border-bottom: 1px solid $black;
-    width: 100%;
+
+	max-width: 100%;
+	background-color: inherit;
 	&:focus {
 		outline: none;
 	}
+}
+
+.black {
+	border-bottom: 1px solid $black;
+	color: $black;
+}
+
+.white {
+	border-bottom: 1px solid $white;
+	color: $white;
 }
