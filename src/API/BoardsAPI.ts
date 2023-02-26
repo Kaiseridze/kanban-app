@@ -5,6 +5,11 @@ export const fetchBoards = async (id: string | undefined) => {
 	return data;
 };
 
+export const createBoard = async (id: string | undefined) => {
+	const { data } = await axios.post(`/boards/`, { project_id: id });
+	return data;
+};
+
 export const updateBoard = async (id: string, { title }: { title: string }) => {
 	const { data } = await axios.patch(`/boards/${id}`, { title });
 	return data;

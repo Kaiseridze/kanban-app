@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { fetchProjectById } from '../../API/ProjectAPI';
-import { fetchBoards, removeBoard} from '../../API/BoardsAPI';
+import { createBoard, fetchBoards, removeBoard } from '../../API/BoardsAPI';
 
 import { IBoard, IProjectModel } from '../../Models';
-import { Loader } from '../../UI';
+import { Loader, Button } from '../../UI';
 import { BoardCard } from '../../Components';
 
 import styles from './kanban.module.scss';
@@ -38,12 +38,17 @@ const Kanban = () => {
 		setBoards(filteredBoards);
 	};
 
+	const onCreate = () => {
+		createBoard(id).then((data) => setBoards((prev) => [...prev, data]));
+	};
+
 	if (pending) return <Loader />;
 	return (
 		<div className={styles.kanbanWrapper}>
 			<div className={styles.kanbanHeader}>
 				<h1 className={styles.kanbanHeaderTitle}>{project?.title}</h1>
 				<p className={styles.kanbanHeaderDescription}>{project?.description}</p>
+				<Button onClick={onCreate} color='black' content='Add new board'/>
 			</div>
 			<div className={styles.kanbanSections}>
 				{boards.map((board) => (
