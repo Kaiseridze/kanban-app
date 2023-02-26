@@ -7,7 +7,6 @@ import {
 	fetchProjects,
 	removeProject,
 	createProject,
-	updateProject,
 } from '../../API/ProjectAPI';
 
 import { IProjectModel } from '../../Models';
@@ -57,7 +56,6 @@ const Projects = () => {
 						color='white'
 						routing={`/project/${project._id}`}
 						onRemove={() => onRemove(project._id)}
-						onEdit={updateProject}
 					/>
 				))}
 			</div>

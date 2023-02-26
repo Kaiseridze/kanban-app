@@ -1,5 +1,6 @@
 export interface IBoardCard {
 	title: string;
-	onEdit?: () => {};
+	id: string
+	onEdit?: (id: string, title: string) => void;
 	onRemove: React.MouseEventHandler<SVGElement>;
 }

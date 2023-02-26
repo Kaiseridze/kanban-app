@@ -8,6 +8,8 @@ import { IProjectCard } from './ProjectCard.types';
 import styles from './projectСard.module.scss';
 import { Button, TextField } from '../../UI';
 
+import { updateProject } from '../../API/ProjectAPI';
+
 const ProjectCard: FC<IProjectCard> = ({
 	color,
 	title,
@@ -15,7 +17,6 @@ const ProjectCard: FC<IProjectCard> = ({
 	id,
 	routing,
 	onRemove,
-	onEdit,
 }) => {
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const [updatedTitle, setUpdatedTitle] = useState<string>(title);
@@ -28,7 +29,7 @@ const ProjectCard: FC<IProjectCard> = ({
 				title: updatedTitle,
 				description: updatedDescription,
 			};
-			onEdit(id, form);
+			updateProject(id, form);
 		}
 		setIsEdit(!isEdit);
 	};

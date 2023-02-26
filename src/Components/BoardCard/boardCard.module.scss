@@ -16,4 +16,24 @@
 	&:hover {
 		color: $red;
 	}
+    margin-left: 10px;
+}
+
+.boardCardIcons{
+    display: flex;
+    align-items: center;
+}
+
+.boardCardEdit {
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+	&:hover {
+		color: $blue;
+	}
+}
+
+.boardCardEditActive {
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+	color: $green;
 }

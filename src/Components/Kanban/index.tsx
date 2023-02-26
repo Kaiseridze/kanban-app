@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { fetchProjectById } from '../../API/ProjectAPI';
-import { fetchBoards, removeBoard } from '../../API/BoardsAPI';
+import { fetchBoards, removeBoard} from '../../API/BoardsAPI';
 
 import { IBoard, IProjectModel } from '../../Models';
 import { Loader } from '../../UI';
@@ -49,6 +49,7 @@ const Kanban = () => {
 				{boards.map((board) => (
 					<BoardCard
 						onRemove={() => onRemove(board._id)}
+						id={board._id}
 						key={board._id}
 						title={board.title}
 					/>

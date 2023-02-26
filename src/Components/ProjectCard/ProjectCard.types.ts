@@ -1,8 +1,3 @@
-interface IForm {
-	title: string;
-	description: string;
-}
-
 export interface IProjectCard {
 	color: 'black' | 'white';
 	title: string;
@@ -11,5 +6,4 @@ export interface IProjectCard {
 	routing?: string;
 	isEdit?: boolean;
 	onRemove: React.MouseEventHandler<SVGElement>;
-	onEdit: (id: string, form: IForm) => void;
 }

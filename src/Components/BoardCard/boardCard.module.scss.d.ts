@@ -3,6 +3,8 @@ declare const styles: {
 	readonly boardCardTitle: string;
 	readonly boardCardIcons: string;
 	readonly boardCardRemove: string;
+	readonly boardCardEdit: string;
+	readonly boardCardEditActive: string;
 };
 
 export default styles;
