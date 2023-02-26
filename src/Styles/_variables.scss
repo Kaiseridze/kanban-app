@@ -1,6 +1,14 @@
 $black: #121212;
 $grey: #292929;
 $white: #ffffff;
-$red: #C70000;
+$red: #c70000;
 $blue: #6bc9eb;
-$green: #78dc64
+$green: #78dc64;
+
+%three-elements-by-grid {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	margin: 32px 0;
+}

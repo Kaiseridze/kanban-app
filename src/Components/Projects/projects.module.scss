@@ -1,9 +1,7 @@
+@import '../../Styles/variables';
+
 .projects {
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 24px;
-	margin: 32px 0;
+	@extend %three-elements-by-grid;
 }
 
 .projectsWrapper {

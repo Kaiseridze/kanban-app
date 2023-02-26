@@ -1,5 +1,9 @@
 @import '../../Styles//variables';
 
+.kanbanWrapper {
+	position: relative;
+}
+
 .kanbanHeader {
 	color: white;
 	border-bottom: 1px solid $white;
@@ -11,4 +15,8 @@
 
 .kanbanHeaderDescription {
 	margin-bottom: 15px;
+}
+
+.kanbanSections {
+	@extend %three-elements-by-grid
 }

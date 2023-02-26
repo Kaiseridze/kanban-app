@@ -1,0 +1,19 @@
+@import '../../Styles/variables';
+
+.boardCard {
+	background-color: $grey;
+	color: $white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.boardCardRemove {
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+	&:hover {
+		color: $red;
+	}
+}
