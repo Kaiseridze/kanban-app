@@ -15,7 +15,7 @@ import { updateBoard } from "../../API/BoardsAPI";
 import { useDebounce } from "../../Hooks/useDebounce";
 import TaskCard from "../TaskCard";
 
-const BoardCard: FC<IBoardCard> = ({ title, onRemove, id, tasks }) => {
+const BoardCard: FC<IBoardCard> = ({ title, onRemove, id, tasks, onCreateTask }) => {
     const [isEdit, setIsEdit] = useState<boolean>(false);
     const [updatedTitle, setUpdatedTitle] = useState<string>("");
     const debouncedValue = useDebounce(updatedTitle, 500);
@@ -67,7 +67,7 @@ const BoardCard: FC<IBoardCard> = ({ title, onRemove, id, tasks }) => {
                                 </>
                             ) : (
                                 <>
-                                    <VscAdd className={styles.boardCardAdd} />
+                                    <VscAdd onClick={onCreateTask} className={styles.boardCardAdd} />
                                     <MdEdit
                                         onClick={onEditTitle}
                                         className={styles.boardCardEdit}

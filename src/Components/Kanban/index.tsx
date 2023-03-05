@@ -10,6 +10,7 @@ import { Loader, Button } from "../../UI";
 import { BoardCard } from "../../Components";
 
 import styles from "./kanban.module.scss";
+import { createTask } from "../../API/TaskAPI";
 
 const Kanban = () => {
     const [project, setProject] = useState<IProjectModel>();
@@ -43,6 +44,17 @@ const Kanban = () => {
         createBoard(id).then((data) => setBoards((prev) => [...prev, data]));
     };
 
+    const onCreateTask = (board_id: string) => {
+        createTask({board_id: board_id}).then((data) => {
+            const updatedBoards = [...boards];
+            const currentBoard = updatedBoards.findIndex(
+                (board) => board._id === board_id
+            );
+            updatedBoards[currentBoard]?.tasks?.push(data);
+            setBoards(updatedBoards)
+        });
+    };
+
     if (pending) return <Loader />;
     return (
         <div className={styles.kanbanWrapper}>
@@ -64,6 +76,7 @@ const Kanban = () => {
                         <BoardCard
                             key={board._id}
                             tasks={board.tasks}
+                            onCreateTask={() => onCreateTask(board._id)}
                             onRemove={() => onRemoveBoard(board._id)}
                             id={board._id}
                             title={board.title}

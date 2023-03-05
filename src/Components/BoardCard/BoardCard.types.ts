@@ -5,5 +5,6 @@ export interface IBoardCard {
 	id: string
 	tasks?: ITaskModel[]
 	onEdit?: (id: string, title: string) => void;
-	onRemove: React.MouseEventHandler<SVGElement>;
+	onRemove?: React.MouseEventHandler<SVGElement>;
+	onCreateTask?: React.MouseEventHandler<SVGElement>
 }
