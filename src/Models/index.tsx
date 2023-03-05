@@ -9,7 +9,7 @@ export interface IBoardModel {
     description: string;
     project_id: string;
     _id: string;
-    tasks?: ITaskModel[];
+    tasks: ITaskModel[];
 }
 
 export interface IProjectModel {

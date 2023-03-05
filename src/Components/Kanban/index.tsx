@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { DragDropContext } from "@hello-pangea/dnd";
+import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 
 import { fetchProjectById } from "../../API/ProjectAPI";
 import { createBoard, fetchBoards, removeBoard } from "../../API/BoardsAPI";
@@ -10,7 +10,7 @@ import { Loader, Button } from "../../UI";
 import { BoardCard } from "../../Components";
 
 import styles from "./kanban.module.scss";
-import { createTask } from "../../API/TaskAPI";
+import { createTask, updatePosition } from "../../API/TaskAPI";
 
 const Kanban = () => {
     const [project, setProject] = useState<IProjectModel>();
@@ -44,15 +44,42 @@ const Kanban = () => {
         createBoard(id).then((data) => setBoards((prev) => [...prev, data]));
     };
 
-    const onCreateTask = (board_id: string) => {
-        createTask({board_id: board_id}).then((data) => {
+    const onCreateTask = (boardId: string) => {
+        createTask(boardId).then((data) => {
             const updatedBoards = [...boards];
             const currentBoard = updatedBoards.findIndex(
-                (board) => board._id === board_id
+                (board) => board._id === boardId
             );
             updatedBoards[currentBoard]?.tasks?.push(data);
-            setBoards(updatedBoards)
+            setBoards(updatedBoards);
         });
+    };
+
+    const onDragEnd = (result: DropResult) => {
+        if (!result.destination) return;
+        const updatedBoards = [...boards];
+        const sourceColumnIndex = updatedBoards.findIndex(
+            (e) => e._id === result.source.droppableId
+        );
+        const destinationColumnIndex = updatedBoards.findIndex(
+            (e) => e._id === result.destination?.droppableId
+        );
+        const sourceColumn = updatedBoards[sourceColumnIndex];
+        const destinationColumn = updatedBoards[destinationColumnIndex];
+
+        const sourceTasks = [...sourceColumn.tasks];
+        const destinationTasks = [...destinationColumn.tasks];
+
+        if (result.source.droppableId === result.destination.droppableId) {
+            const [removed] = destinationTasks.splice(result.source.index, 1);
+            destinationTasks.splice(result.destination.index, 0, removed);
+            updatedBoards[destinationColumnIndex].tasks = destinationTasks;
+            setBoards(updatedBoards);
+            updatePosition(
+                result.source.droppableId,
+                updatedBoards[destinationColumnIndex].tasks
+            );
+        }
     };
 
     if (pending) return <Loader />;
@@ -71,7 +98,7 @@ const Kanban = () => {
                 />
             </div>
             <div className={styles.kanbanSections}>
-                <DragDropContext onDragEnd={(result) => console.log(result)}>
+                <DragDropContext onDragEnd={onDragEnd}>
                     {boards.map((board) => (
                         <BoardCard
                             key={board._id}
