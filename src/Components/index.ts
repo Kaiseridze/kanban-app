@@ -4,3 +4,4 @@ export { default as Kanban } from './Kanban';
 export { default as Container } from './Container';
 export { default as ProjectCard } from './ProjectCard';
 export { default as BoardCard } from './BoardCard';
+export {default as TaskCard} from './TaskCard'

@@ -3,11 +3,14 @@
 .boardCard {
 	background-color: $grey;
 	color: $white;
-	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	padding: 10px;
 	border-radius: 5px;
+}
+
+.boardCardHeader{
+	display: flex;
+	justify-content: space-between;
 }
 
 .boardCardAdd {

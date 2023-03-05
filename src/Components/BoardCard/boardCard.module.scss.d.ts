@@ -1,5 +1,6 @@
 declare const styles: {
 	readonly boardCard: string;
+	readonly boardCardHeader: string
 	readonly boardCardTitle: string;
 	readonly boardCardIcons: string;
 	readonly boardCardAdd: string;

@@ -1,67 +1,78 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import { DragDropContext } from "@hello-pangea/dnd";
 
-import { fetchProjectById } from '../../API/ProjectAPI';
-import { createBoard, fetchBoards, removeBoard } from '../../API/BoardsAPI';
+import { fetchProjectById } from "../../API/ProjectAPI";
+import { createBoard, fetchBoards, removeBoard } from "../../API/BoardsAPI";
 
-import { IBoard, IProjectModel } from '../../Models';
-import { Loader, Button } from '../../UI';
-import { BoardCard } from '../../Components';
+import { IBoardModel, IProjectModel } from "../../Models";
+import { Loader, Button } from "../../UI";
+import { BoardCard } from "../../Components";
 
-import styles from './kanban.module.scss';
+import styles from "./kanban.module.scss";
 
 const Kanban = () => {
-	const [project, setProject] = useState<IProjectModel>();
-	const [boards, setBoards] = useState<IBoard[]>([]);
-	const [pending, setPending] = useState<boolean>(false);
+    const [project, setProject] = useState<IProjectModel>();
+    const [boards, setBoards] = useState<IBoardModel[]>([]);
+    const [pending, setPending] = useState<boolean>(true);
 
-	const { id } = useParams<string>();
+    const { id } = useParams<string>();
 
-	const onFetch = useCallback(() => {
-		setPending(true);
-		fetchProjectById(id).then((data) => {
-			setProject(data);
-		});
-		fetchBoards(id).then((data) => {
-			setBoards(data);
-			setPending(false);
-		});
-	}, [id]);
+    const onFetch = useCallback(() => {
+        setPending(true);
+        fetchProjectById(id).then((data) => {
+            setProject(data);
+        });
+        fetchBoards(id).then((data) => {
+            setBoards(data);
+            setPending(false);
+        });
+    }, [id]);
 
-	useEffect(() => {
-		onFetch();
-	}, [onFetch]);
+    useEffect(() => {
+        onFetch();
+    }, [onFetch]);
 
-	const onRemove = (id: string) => {
-		removeBoard(id);
-		const filteredBoards = boards.filter((board) => board._id !== id);
-		setBoards(filteredBoards);
-	};
+    const onRemoveBoard = (id: string) => {
+        removeBoard(id);
+        const filteredBoards = boards.filter((board) => board._id !== id);
+        setBoards(filteredBoards);
+    };
 
-	const onCreate = () => {
-		createBoard(id).then((data) => setBoards((prev) => [...prev, data]));
-	};
+    const onCreateBoard = () => {
+        createBoard(id).then((data) => setBoards((prev) => [...prev, data]));
+    };
 
-	if (pending) return <Loader />;
-	return (
-		<div className={styles.kanbanWrapper}>
-			<div className={styles.kanbanHeader}>
-				<h1 className={styles.kanbanHeaderTitle}>{project?.title}</h1>
-				<p className={styles.kanbanHeaderDescription}>{project?.description}</p>
-				<Button className={styles.kanbanHeaderButton} onClick={onCreate} color='white' content='Add new board'/>
-			</div>
-			<div className={styles.kanbanSections}>
-				{boards.map((board) => (
-					<BoardCard
-						onRemove={() => onRemove(board._id)}
-						id={board._id}
-						key={board._id}
-						title={board.title}
-					/>
-				))}
-			</div>
-		</div>
-	);
+    if (pending) return <Loader />;
+    return (
+        <div className={styles.kanbanWrapper}>
+            <div className={styles.kanbanHeader}>
+                <h1 className={styles.kanbanHeaderTitle}>{project?.title}</h1>
+                <p className={styles.kanbanHeaderDescription}>
+                    {project?.description}
+                </p>
+                <Button
+                    className={styles.kanbanHeaderButton}
+                    onClick={onCreateBoard}
+                    color="white"
+                    content="Add new board"
+                />
+            </div>
+            <div className={styles.kanbanSections}>
+                <DragDropContext onDragEnd={(result) => console.log(result)}>
+                    {boards.map((board) => (
+                        <BoardCard
+                            key={board._id}
+                            tasks={board.tasks}
+                            onRemove={() => onRemoveBoard(board._id)}
+                            id={board._id}
+                            title={board.title}
+                        />
+                    ))}
+                </DragDropContext>
+            </div>
+        </div>
+    );
 };
 
 export default Kanban;

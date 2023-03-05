@@ -5,6 +5,7 @@ declare const styles: {
 	readonly kanbanHeaderDescription: string;
 	readonly kanbanHeaderButton: string
 	readonly kanbanSections: string
+
 };
 
 export default styles;
