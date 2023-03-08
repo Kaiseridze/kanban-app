@@ -1,13 +1,14 @@
 import axios from '../axios';
+import { IProjectModel } from '../Models';
 
 export const fetchProjects = async () => {
 	const { data } = await axios.get('/projects');
-	return data;
+	return data as IProjectModel[];
 };
 
 export const fetchProjectById = async (id: string | undefined) => {
 	const { data } = await axios.get(`/projects/${id}`);
-	return data;
+	return data as IProjectModel;
 };
 
 export const removeProject = async (id: string) => {
@@ -16,7 +17,7 @@ export const removeProject = async (id: string) => {
 
 export const createProject = async () => {
 	const { data } = await axios.post('/projects');
-	return data;
+	return data as IProjectModel;
 };
 
 export const updateProject = async (
@@ -24,5 +25,5 @@ export const updateProject = async (
 	{ title, description }: { title: string; description: string }
 ) => {
 	const { data } = await axios.patch(`/projects/${id}`, { title, description });
-	return data;
+	return data as IProjectModel;
 };

@@ -1,12 +1,12 @@
 declare const styles: {
-	readonly boardCard: string;
-	readonly boardCardHeader: string
-	readonly boardCardTitle: string;
-	readonly boardCardIcons: string;
-	readonly boardCardAdd: string;
-	readonly boardCardRemove: string;
-	readonly boardCardEdit: string;
-	readonly boardCardEditActive: string;
+	readonly card: string;
+	readonly header: string
+	readonly title: string;
+	readonly icons: string;
+	readonly add: string;
+	readonly remove: string;
+	readonly edit: string;
+	readonly editActive: string;
 };
 
 export default styles;

@@ -43,9 +43,9 @@ const BoardCard: FC<IBoardCard> = ({ title, onRemove, id, tasks, onCreateTask })
                 <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    className={styles.boardCard}
+                    className={styles.card}
                 >
-                    <div className={styles.boardCardHeader}>
+                    <div className={styles.header}>
                         {isEdit ? (
                             <TextField
                                 onChange={onChangeUpdatedTitle}
@@ -53,27 +53,27 @@ const BoardCard: FC<IBoardCard> = ({ title, onRemove, id, tasks, onCreateTask })
                                 color="white"
                             />
                         ) : (
-                            <h3 className={styles.boardCardTitle}>
+                            <h3 className={styles.title}>
                                 {updatedTitle || title}
                             </h3>
                         )}
-                        <div className={styles.boardCardIcons}>
+                        <div className={styles.icons}>
                             {isEdit ? (
                                 <>
                                     <MdEdit
                                         onClick={onEditTitle}
-                                        className={styles.boardCardEditActive}
+                                        className={styles.editActive}
                                     />
                                 </>
                             ) : (
                                 <>
-                                    <VscAdd onClick={onCreateTask} className={styles.boardCardAdd} />
+                                    <VscAdd onClick={onCreateTask} className={styles.add} />
                                     <MdEdit
                                         onClick={onEditTitle}
-                                        className={styles.boardCardEdit}
+                                        className={styles.edit}
                                     />
                                     <ImCross
-                                        className={styles.boardCardRemove}
+                                        className={styles.remove}
                                         onClick={onRemove}
                                     />
                                 </>

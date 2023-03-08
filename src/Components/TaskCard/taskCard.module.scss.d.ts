@@ -1,5 +1,5 @@
 declare const styles: {
-    readonly taskCard: string
+    readonly card: string
 }
 
 export default styles

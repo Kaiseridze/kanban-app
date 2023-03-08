@@ -45,20 +45,20 @@ const ProjectCard: FC<IProjectCard> = ({
 	};
 
 	return (
-		<div className={`${styles.projectCard} ${styles[color]}`}>
-			<div className={styles.projectCardIcons}>
+		<div className={`${styles.card} ${styles[color]}`}>
+			<div className={styles.icons}>
 				<MdEdit
 					className={
-						isEdit ? styles.editProjectCardActive : styles.editProjectCard
+						isEdit ? styles.editActive : styles.edit
 					}
 					onClick={onChangeEdit}
 				/>
-				<ImCross className={styles.removeProjectCard} onClick={onRemove} />
+				<ImCross className={styles.remove} onClick={onRemove} />
 			</div>
 			{isEdit ? (
 				<>
 					<TextField
-						className={styles.projectCardTitle}
+						className={styles.title}
 						onChange={onChangeUpdatedTitle}
 						color='black'
 						value={updatedTitle}
@@ -71,15 +71,15 @@ const ProjectCard: FC<IProjectCard> = ({
 				</>
 			) : (
 				<>
-					<h1 className={styles.projectCardTitle}>{updatedTitle}</h1>
-					<p className={styles.projectCardDescription}>{updatedDescription}</p>
+					<h1 className={styles.title}>{updatedTitle}</h1>
+					<p className={styles.description}>{updatedDescription}</p>
 				</>
 			)}
 
 			{routing && !isEdit && (
 				<Link to={routing}>
 					<Button
-						className={styles.projectCardButton}
+						className={styles.button}
 						color='black'
 						content='Open'
 					/>

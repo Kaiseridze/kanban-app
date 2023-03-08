@@ -1,6 +1,6 @@
 @import '../../Styles/variables';
 
-.boardCard {
+.card {
 	background-color: $grey;
 	color: $white;
 	align-items: center;
@@ -8,12 +8,12 @@
 	border-radius: 5px;
 }
 
-.boardCardHeader{
+.header{
 	display: flex;
 	justify-content: space-between;
 }
 
-.boardCardAdd {
+.add {
 	cursor: pointer;
 	transition: 0.3s linear;
 
@@ -22,7 +22,7 @@
 	}
 }
 
-.boardCardRemove {
+.remove {
 	cursor: pointer;
 	transition: 0.2s ease-in-out;
 	&:hover {
@@ -30,12 +30,12 @@
 	}
 }
 
-.boardCardIcons {
+.icons {
 	display: flex;
 	align-items: center;
 }
 
-.boardCardEdit {
+.edit {
 	cursor: pointer;
 	transition: 0.2s ease-in-out;
 	margin: 0 10px;
@@ -44,7 +44,7 @@
 	}
 }
 
-.boardCardEditActive {
+.editActive {
 	cursor: pointer;
 	transition: 0.2s ease-in-out;
 	color: $green;

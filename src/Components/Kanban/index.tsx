@@ -59,16 +59,28 @@ const Kanban = () => {
         if (!result.destination) return;
         const updatedBoards = [...boards];
         const sourceColumnIndex = updatedBoards.findIndex(
-            (e) => e._id === result.source.droppableId
+            (board) => board._id === result.source.droppableId
         );
         const destinationColumnIndex = updatedBoards.findIndex(
-            (e) => e._id === result.destination?.droppableId
+            (board) => board._id === result.destination?.droppableId
         );
         const sourceColumn = updatedBoards[sourceColumnIndex];
         const destinationColumn = updatedBoards[destinationColumnIndex];
 
         const sourceTasks = [...sourceColumn.tasks];
         const destinationTasks = [...destinationColumn.tasks];
+
+        if (result.source.droppableId !== result.destination.droppableId) {
+            const [removed] = sourceTasks.splice(result.source.index, 1);
+            destinationTasks.splice(result.destination.index, 0, removed);
+            updatedBoards[sourceColumnIndex].tasks = sourceTasks;
+            updatedBoards[destinationColumnIndex].tasks = destinationTasks;
+
+            setBoards(updatedBoards);
+            
+            updatePosition(result.destination.droppableId, updatedBoards[destinationColumnIndex].tasks)
+            updatePosition(result.source.droppableId, updatedBoards[sourceColumnIndex].tasks)
+        }
 
         if (result.source.droppableId === result.destination.droppableId) {
             const [removed] = destinationTasks.splice(result.source.index, 1);
@@ -84,20 +96,20 @@ const Kanban = () => {
 
     if (pending) return <Loader />;
     return (
-        <div className={styles.kanbanWrapper}>
-            <div className={styles.kanbanHeader}>
-                <h1 className={styles.kanbanHeaderTitle}>{project?.title}</h1>
-                <p className={styles.kanbanHeaderDescription}>
+        <div className={styles.wrapper}>
+            <div className={styles.header}>
+                <h1 className={styles.title}>{project?.title}</h1>
+                <p className={styles.description}>
                     {project?.description}
                 </p>
                 <Button
-                    className={styles.kanbanHeaderButton}
+                    className={styles.button}
                     onClick={onCreateBoard}
                     color="white"
                     content="Add new board"
                 />
             </div>
-            <div className={styles.kanbanSections}>
+            <div className={styles.sections}>
                 <DragDropContext onDragEnd={onDragEnd}>
                     {boards.map((board) => (
                         <BoardCard

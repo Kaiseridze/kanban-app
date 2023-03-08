@@ -14,7 +14,7 @@ const TaskCard: FC<ITaskCard> = ({
             ref={reference}
             {...dragHandleProps}
             {...draggableProps}
-            className={styles.taskCard}
+            className={styles.card}
         >
             {title}
         </li>

@@ -1,26 +1,26 @@
 @import '../../Styles//variables';
 
-.kanbanWrapper {
+.wrapper {
 	position: relative;
 }
 
-.kanbanHeader {
+.header {
 	color: white;
 	border-bottom: 1px solid $white;
 }
 
-.kanbanHeaderTitle {
+.title {
 	margin: 10px 0;
 }
 
-.kanbanHeaderDescription {
+.description {
 	margin-bottom: 15px;
 }
 
-.kanbanHeaderButton {
+.button {
 	margin-bottom: 20px;
 }
 
-.kanbanSections {
+.sections {
 	@extend %three-elements-by-grid;
 }

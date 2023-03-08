@@ -3,7 +3,7 @@ import { ITaskModel } from "../Models";
 
 export const createTask = async (boardId: string) => {
     const { data } = await axios.post(`/tasks`, {board_id: boardId});
-    return data;
+    return data as ITaskModel;
 };
 
 export const updatePosition = async (boardId: string, tasks: ITaskModel[]) => {

@@ -1,12 +1,12 @@
 declare const styles: {
-	readonly projectCard: string;
-	readonly projectCardIcons: string;
-	readonly projectCardTitle: string;
-	readonly projectCardDescription: string;
-	readonly removeProjectCard: string;
-	readonly editProjectCard: string;
-	readonly editProjectCardActive: string;
-	readonly projectCardButton: string;
+	readonly card: string;
+	readonly icons: string;
+	readonly title: string;
+	readonly description: string;
+	readonly remove: string;
+	readonly edit: string;
+	readonly editActive: string;
+	readonly button: string;
 	readonly black: string;
 	readonly white: string;
 };
